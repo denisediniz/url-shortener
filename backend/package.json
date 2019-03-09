@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "URL Shortener backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node server.js"
+  },
+  "author": "Denise Diniz",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dns": "^0.2.2",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.17",
+    "mongoose-sequence": "^5.0.1",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "dotenv": "^6.2.0"
+  }
+}
