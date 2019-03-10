@@ -1,6 +1,6 @@
 import dns from 'dns'
 import url from 'url'
-import model from './models'
+import apiModel from '../models/api.model'
 
 exports.dataCreate = (req, res) => {
     const originalUrl = req.body.original_url
@@ -13,7 +13,7 @@ exports.dataCreate = (req, res) => {
             done({error: 'invalid URL'})
         } else {
             //Check if the URL is already indexed
-            model.findOne({original_url: originalUrl}, (err, data) => {
+            apiModel.findOne({original_url: originalUrl}, (err, data) => {
                 if(err) {
                     done({error: err})
                 } else {
@@ -22,7 +22,7 @@ exports.dataCreate = (req, res) => {
                         done({original_url: data.original_url, short_url: data.short_url})
                     } else {
                         // Data is new
-                        const newUrl = new model({
+                        const newUrl = new apiModel({
                             original_url: originalUrl
                         })
 
@@ -46,7 +46,7 @@ exports.dataRead = (req, res) => {
     const done = (data) => res.json(data)
 
     // Find shortened url by index
-    model.findOne({short_url: urlId}, (err, data) => {
+    apiModel.findOne({short_url: urlId}, (err, data) => {
         if(err) {
             done({error: err})
         } else {

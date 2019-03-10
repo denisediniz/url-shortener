@@ -6,8 +6,6 @@ import M from "materialize-css";
 // Main css
 import './App.css';
 
-const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3001/api/shorturl';
-
 class App extends Component {
   state = {
     id: null,
@@ -23,7 +21,7 @@ class App extends Component {
   handleSubmit = value => e => {
     e.preventDefault();
     e.target.reset();
-    axios.post(`${SERVER_URL}/new`, {
+    axios.post('/new', {
       original_url: value
     }).then(res => {
       if(res.data.error) {
@@ -64,7 +62,7 @@ class App extends Component {
                 {(this.state.url === null) ? 'Your shortened URL will be here' : this.state.url}
               </p>
               <p className={`scale-transition scale-out ${ (this.state.id === null) ? '' : 'scale-in' }`}>
-                <a className={(this.state.id === null) ? 'hide' : ''} href={`${SERVER_URL}/${this.state.id}`} title={this.state.url} target="_blank" rel="noopener noreferrer">{`${SERVER_URL}/${this.state.id}`}</a>
+                <a className={(this.state.id === null) ? 'hide' : ''} href={`${process.env.REACT_APP_API_URL}/${this.state.id}`} title={this.state.url} target="_blank" rel="noopener noreferrer">{`${process.env.REACT_APP_API_URL}/${this.state.id}`}</a>
               </p>
           </div>
         </div>

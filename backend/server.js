@@ -1,9 +1,14 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import express from 'express'
 import bodyParser from 'body-parser'
-import routes from './routes'
+
+// Routes
+import apiRoute from './routes/api.route'
+
+// Set the path of the env file
+dotenv.config({path: './.env.development'})
 
 const app = express()
 
@@ -21,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Call routes
-app.use('/api/shorturl', routes)
+app.use('/api/shorturl', apiRoute)
 
 // Init the backend
-app.listen(process.env.PORT || 3001, () => console.log(`API listening on port ${process.env.PORT || 3001}`))
+app.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))

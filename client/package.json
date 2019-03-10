@@ -1,9 +1,10 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "env-cmd": "^8.0.2",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -12,10 +13,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:production": "env-cmd .env.production npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:3001/api/shorturl",
   "eslintConfig": {
     "extends": "react-app"
   },
