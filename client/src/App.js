@@ -21,7 +21,7 @@ class App extends Component {
   handleSubmit = value => e => {
     e.preventDefault();
     e.target.reset();
-    axios.post('/new', {
+    axios.post('/api/shorturl/new', {
       original_url: value
     }).then(res => {
       if(res.data.error) {
@@ -62,7 +62,7 @@ class App extends Component {
                 {(this.state.url === null) ? 'Your shortened URL will be here' : this.state.url}
               </p>
               <p className={`scale-transition scale-out ${ (this.state.id === null) ? '' : 'scale-in' }`}>
-                <a className={(this.state.id === null) ? 'hide' : ''} href={`${process.env.REACT_APP_API_URL}/${this.state.id}`} title={this.state.url} target="_blank" rel="noopener noreferrer">{`${process.env.REACT_APP_API_URL}/${this.state.id}`}</a>
+                <a className={(this.state.id === null) ? 'hide' : ''} href={`${process.env.REACT_APP_API_URL}/api/shorturl/${this.state.id}`} title={this.state.url} target="_blank" rel="noopener noreferrer">{`${process.env.REACT_APP_API_URL}/api/shorturl/${this.state.id}`}</a>
               </p>
           </div>
         </div>
