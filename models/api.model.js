@@ -1,9 +1,9 @@
-import mongoose, { Schema } from 'mongoose'
-import sequence from 'mongoose-sequence'
+const mongoose = require('mongoose')
+const sequence = require('mongoose-sequence')
 
 const AutoIncrement = sequence(mongoose)
 
-const DataSchema = new Schema({
+const DataSchema = new mongoose.Schema({
     original_url: {
         type: String,
         required: true

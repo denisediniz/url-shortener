@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>URL Shortener</title>
+	<link
+		href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAFb1cTnG9XE5xvVxOcb1cTnG9XE5xvVxOcZE4RnGROEZxkThGcZE4RnAAAACUAAAAAAAAAAAAAAAAAAAAAb1cTh96tJf/erSX/3q0l/96tJf/erSX/3q0l/96tJf/HmyH/x5sh/8ebIf/w1Yr/AAAAJwAAAAAAAAAAAAAAAG9XE4ferSX/3q0l/96tJf/erSX/3q0l/96tJf/erSX/3q0l/8ebIf/HmyH/8NWK//DViv8AAAAnAAAAAAAAAABvVxOH3q0l/96tJf/erSX/x5sh//v04v/79OL/3q0l/96tJf/erSX/x5sh//DViv/w1Yr/8NWK/wAAACcAAAAAb1cTh96tJf/erSX/x5sh//v04v/erSX/3q0l//v04v/erSX/3q0l/96tJf/w1Yr/8NWK//DViv/w1Yr/AAAAJW9XE4ferSX/3q0l//v04v/erSX/3q0l/96tJf/79OL/3q0l/96tJf/erSX/3q0l/96tJf/erSX/3q0l/29XE5xvVxOH3q0l/96tJf/79OL/0KMj/96tJf/79OL/3q0l//v04v/erSX/3q0l/96tJf/erSX/3q0l/96tJf9vVxOcb1cTh96tJf/erSX/3q0l//v04v/79OL/3q0l//v04v/erSX/+/Ti/9yrJf/erSX/3q0l/96tJf/erSX/b1cTnG9XE4ferSX/3q0l/96tJf/erSX/3q0l//nv1f/erSX/+/Ti/96tJf/79OL/+/Ti/96tJf/erSX/3q0l/29XE5xvVxOH3q0l/96tJf/erSX/3q0l/96tJf/erSX/+O7V/96tJf/79OL/3q0l/96tJf/79OL/3q0l/96tJf9vVxOcb1cTh96tJf/erSX/3q0l/96tJf/erSX/3q0l/96tJf/79OL/3q0l/96tJf/HmyH/+/Ti/96tJf/erSX/b1cTnG9XE4ferSX/3q0l/96tJf/erSX/3q0l/96tJf/erSX/+/Ti/96tJf/HmyH/+/Ti/96tJf/erSX/3q0l/29XE5xvVxOH3q0l/96tJf/erSX/3q0l/96tJf/erSX/3q0l/96tJf/79OL/+/Ti/96tJf/erSX/3q0l/96tJf9vVxOcb1cTh96tJf/erSX/3q0l/96tJf/erSX/3q0l/96tJf/erSX/3q0l/96tJf/erSX/3q0l/96tJf/erSX/b1cTnG9XE4ferSX/3q0l/96tJf/erSX/3q0l/96tJf/erSX/3q0l/96tJf/erSX/3q0l/96tJf/erSX/3q0l/29XE5wAAAAAb1cTh29XE4dvVxOHb1cTh29XE4dvVxOHb1cTh29XE4dvVxOHb1cTh29XE4dvVxOHb1cTh29XE4cAAAAFgB8AAAAPAAAABwAAAAMAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAA=="
+		rel="icon" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<h1>URL Shortener Microservice</h1>
+
+				<hr>
+
+				<div class="section">
+					<div class="row">
+						<div class="col s12 m6 offset-m3 z-depth-1">
+							<div class="row">
+								<h2 class="col s12">Short URL Creation</h2>
+								<form id="urlCreate" action="api/shorturl/new" method="POST" class="col s12">
+									<div class="input-field">
+										<input id="url_input" class="validate" type="text" name="url" placeholder="https://www.google.com"
+											required>
+										<label for="url_input">URL to be shortened</label>
+									</div>
+									<div class="">
+										<button class="btn waves-effect waves-light" type="submit">GENERATE<i
+												class="material-icons right">send</i></button>
+									</div>
+								</form>
+								<div class="col">
+									<p id="result"></p>
+									<p id="response"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+
+
+				<div class="section">
+					<h2>How it works</h2>
+					<ol>
+						<li>POST a URL to <code>/api/shorturl/new</code> and receive a shortened URL in the
+							JSON response.<br>Example : <code>{"original_url":"www.google.com","short_url":1}</code>;</li>
+						<li>If you pass an invalid URL that doesn't follow the <code>http(s)://www.example.com(/more/routes)</code>
+							format, the JSON response will contain an error like <code>{"error":"invalid URL"}</code>;</li>
+						<li>When you visit the shortened URL it will redirect you to your original link.</li>
+					</ol>
+				</div>
+
+				<div class="divider"></div>
+
+				<div class="section">
+					<h2>Example Usage</h2>
+					<p><code>/api/shorturl/1</code> will redirect to <em>https://www.google.com/</em></p>
+
+				</div>
+
+				<div class="divider"></div>
+
+				<div class="section">
+					<h2>Installation</h2>
+					<ol>
+						<li><code>git clone [PASTE_URL_HERE]</code></li>
+						<li><code>cd url-shortener</code></li>
+						<li><code>npm install</code></li>
+					</ol>
+					<p>You must have MongoDB locally installed and running. If you prefer a cloud database just replace the url
+						in <em>package.json</em>. Then:</p>
+					<ul>
+						<li>Development: <code>npm run dev</code></li>
+						<li>*Production: <code>npm start</code><br><small>*you must set your <code>DATABASE_URL</code> in
+								<code>.env</code> file.</small></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+		<script>
+			var jq = $.noConflict();
+			jq(function () {
+				jq('#urlCreate').submit(function (event) {
+					event.preventDefault();
+					jq('#result').html('');
+					jq('#response').html('');
+					jq.ajax({
+						url: '/api/shorturl/new',
+						type: 'post',
+						data: { original_url: jq('#url_input').val() }
+					})
+						.done(function (data) {
+							jq('#result').html('<b>Result:</b> <a href="https://url-shortener-dd.glitch.me/api/shorturl/' + data.short_url + '" title="' + data.original_url + '" target="_blank" rel="noreferrer noopener">New URL!</a>');
+							jq('#response').html('<b>Response:</b> <code>' + JSON.stringify(data) + '</code>');
+							jq('#urlCreate').trigger('reset');
+						})
+						.fail(function (xhr, textStatus, error) {
+							jq('#result').html('<b>Result:</b> ' + xhr.responseJSON.error);
+							jq('#response').html('<b>Response:</b> <code>' + JSON.stringify(xhr.responseJSON) + '</code>');
+						});
+				});
+			});
+		</script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+
+</html>

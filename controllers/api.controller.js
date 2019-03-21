@@ -1,25 +1,24 @@
-import dns from 'dns'
-import url from 'url'
-import apiModel from '../models/api.model'
+const dns = require('dns')
+const url = require('url')
+const apiModel = require('../models/api.model')
 
 exports.dataCreate = (req, res) => {
     const originalUrl = req.body.original_url
     const parsedUrl = url.parse(originalUrl).hostname
-    const done = (data) => res.json(data)
 
     // Check if it's a valid URL
     dns.lookup(parsedUrl, err => {
         if(parsedUrl === err) {
-            done({error: 'invalid URL'})
+            res.status(400).json({error: 'invalid URL'})
         } else {
             //Check if the URL is already indexed
             apiModel.findOne({original_url: originalUrl}, (err, data) => {
                 if(err) {
-                    done({error: err})
+                    res.status(400).json({error: err})
                 } else {
                     if(data) {
                         // Data is already indexed
-                        done({original_url: data.original_url, short_url: data.short_url})
+                        res.status(200).json({original_url: data.original_url, short_url: data.short_url})
                     } else {
                         // Data is new
                         const newUrl = new apiModel({
@@ -31,7 +30,7 @@ exports.dataCreate = (req, res) => {
                                 done({error: err})
                             } else {
                                 // Data is created
-                                done({original_url: data.original_url, short_url: data.short_url})
+                                res.status(200).json({original_url: data.original_url, short_url: data.short_url})
                             }
                         })
                     }
@@ -43,12 +42,11 @@ exports.dataCreate = (req, res) => {
 
 exports.dataRead = (req, res) => {
     const urlId = req.params.urlId
-    const done = (data) => res.json(data)
 
     // Find shortened url by index
     apiModel.findOne({short_url: urlId}, (err, data) => {
         if(err) {
-            done({error: err})
+            res.status(400).json({error: err})
         } else {
             // Shortened url exists
             if(data) {
@@ -56,7 +54,7 @@ exports.dataRead = (req, res) => {
                 res.redirect(data.original_url)
             } else {
                 // Shortened url doesn't exist
-                done({error: 'No short url found for given input'})
+                res.status(400).json({error: 'No short url found for given input'})
             }
         }
     })

@@ -1,23 +1,33 @@
 {
   "name": "url-shortener",
   "version": "1.0.0",
-  "description": "Full stack JavaScript app to shorten URLs.",
-  "main": "index.js",
+  "description": "Microservice to shorten URLs.",
+  "main": "server.js",
   "scripts": {
-    "start": "concurrently \"cd backend && npm start\" \"cd client && npm start\""
+    "start": "node ./server.js",
+    "dev": "set PORT=3000 && set DATABASE_URL=mongodb://localhost:27017/url-shortener&& nodemon ./server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/denisediniz/url-shortener.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Denise Diniz",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/denisediniz/url-shortener/issues"
   },
   "homepage": "https://github.com/denisediniz/url-shortener#readme",
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dns": "^0.2.2",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.17",
+    "mongoose-sequence": "^5.0.1",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }

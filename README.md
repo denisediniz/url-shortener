@@ -1,23 +1,23 @@
 # URL Shortener Microservice
-Full stack JavaScript app to shorten URLs.
+Microservice to shorten URLs. Powered by Express and MongoDB+Mongoose.
 
-## Development
-Just `clone`, `cd url-shortener` and `npm start`.
+## How it works
+* POST a URL to `/api/shorturl/new` and receive a shortened URL in the JSON response. Example : `{"original_url":"www.google.com","short_url":1}`;
+* If you pass an invalid URL that doesn't follow the `http(s)://www.example.com(/more/routes)` format, the JSON response will contain an error like `{"error":"invalid URL"}`;
+* When you visit the shortened URL it will redirect you to your original link.
 
-## Production
-Follow your host instructions but it's usually like this:
+## Example Usage
+`/api/shorturl/1` will redirect to https://www.google.com/
 
-### Production Server
-* Send everything to your production server.
+## Installation
+1. `git clone [PASTE_URL_HERE]`
+2. `cd url-shortener`
+3. `npm install`
 
-### Client Folder
-* Create a `.env.production` file and set your REACT_APP_API_URL production enviroment variable;
-* Run `npm run build:production`. The `/client` folder only needs the `/build` folder for production (`/build` is the view for your server).
+You must have MongoDB locally installed and running. If you prefer a cloud database just replace the url in *package.json*. Then:
 
-### Backend Folder
-* Create your `.env` file at the root (/url-shortener/.env) and set your production variables. Remove the `.env.development` at `/backend` folder.
+Development: `npm run dev`
 
-#### Optional: testing the production setup in development before deploying
-* **/client:** `npm run build:dev` for testing the build in development.
-* **/backend:** at `.env.development` set your `NODE_ENV` to `production`. Don't forget to rollback to `development` after testing.
-* **Start your backend server ONLY:** go to `/backend` and run `npm start`.
+Production: `npm start`
+
+*production note: you must set your `DATABASE_URL` in `.env` file.
